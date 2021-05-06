@@ -1,0 +1,138 @@
+prog		:	cdecl prog
+			|	cdefn prog
+			|	%empty
+			;
+
+cdecl		:	_STRUCT IDENTIFIER ';'
+			|	type IDENTIFIER '(' args ')' ';'
+			;
+
+cdefn		:	_STRUCT IDENTIFIER '{' field_defn '}' ';'
+			|	type IDENTIFIER '(' args ')' body
+			|	_TYPEDEF type IDENTIFIER ';'
+			;
+
+args		:	type IDENTIFIER rght_args
+			|	%empty
+			;
+
+rght_args	:	',' type IDENTIFIER
+			|	%empty
+			;
+
+field_defn	:	type IDENTIFIER decl_assign ';' field_defn
+			|	%empty
+			;
+
+type		:	_INT
+			|	_BOOL
+			|	_STRING
+			|	_CHAR
+			|	_VOID
+			|	type '*'
+			|	type '[' ']'
+			|	_STRUCT IDENTIFIER
+			|	IDENTIFIER
+			;
+
+decl_assign	:	'=' expr decl_assign
+			|	%empty
+			;
+
+body		:	'{' stmts '}'
+			;
+
+stmts		:	stmt stmts
+			|	%empty
+			;
+
+stmt 		:	simple ';'
+			|	_RETURN null_expr ';'
+			|	_IF '(' expr ')' body else_stmt
+			|	_WHILE '(' expr ')' body
+			|	_FOR '(' null_simple ';' expr ';' null_simple ')' body
+			|	body
+			|	_ASSERT '(' expr ')' ';'
+			|	_ERROR '(' expr ')' ';'
+			;
+
+else_stmt	:	_ELSE body
+			|	%empty
+			;
+
+simple		:	lftval asn_op expr
+			|	lftval INC_OP
+			|	lftval DEC_OP
+			|	expr
+			|	type IDENTIFIER decl_assign
+			;
+
+null_simple	:	simple
+			|	%empty
+			;
+
+lftval		:	IDENTIFIER
+			|	lftval '.' IDENTIFIER
+			|	lftval PTR_OP IDENTIFIER
+			|	'*' lftval
+			|	lftval '[' expr ']'
+			|	'(' lftval ')'
+			;
+
+expr 		:	'(' expr ')'
+			|	number
+			|	STRING_LITERAL
+			|	CHAR_LITERAL
+			|	_TRUE
+			|	_FALSE
+			|	_NULL
+			|	IDENTIFIER
+			|	expr bin_op expr
+			|	un_op expr
+			|	expr '?' expr ':' expr
+			|	IDENTIFIER '(' params ')'
+			|	expr '.' IDENTIFIER
+			|	expr PTR_OP IDENTIFIER
+			|	expr '[' expr ']'
+			|	_ALLOC '(' type ')'
+			|	_ALLOC_ARRAY '(' type ',' expr ')'
+			;
+
+null_expr	:	expr
+			|	%empty
+			;
+
+params		:	expr rght_params
+			|	%empty
+			;
+
+rght_params	:	',' expr
+			|	%empty
+			;
+
+un_op		:	'!'
+			|	'~'
+			|	'-'
+			;
+
+bin_op		:	'<' | LE_OP | EQ_OP | GE_OP | '>'
+			|	'*' | '/' | '%'
+			|	'+' | '-'
+			;
+
+asn_op		:	'='
+			|	MUL_ASSIGN
+			|	DIV_ASSIGN
+			|	MOD_ASSIGN
+			|	ADD_ASSIGN
+			|	SUB_ASSIGN 
+			|	LEFT_ASSIGN
+			|	RIGHT_ASSIGN
+			|	AND_ASSIGN
+			|	XOR_ASSIGN
+			|	OR_ASSIGN
+			;
+
+number		:	INTEGER
+			|	FLOAT
+			;

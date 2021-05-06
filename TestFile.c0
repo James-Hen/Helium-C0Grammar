@@ -1,4 +1,41 @@
-abc defghi
-//this line is comment, abc 123 !@#$
-123	45678	//comment until line end
-!	@	#	$
+// this file is used to test c0 language features (CMU 15-122)
+
+#use "mylib.c0"
+
+struct label {
+    int index;
+    string name;
+};
+
+int eat(int w, int food) {
+    w -= 1;             // digest
+    return w + food;
+}
+
+string fat(int w) {
+    return w > 200 ? "Yes" : "No";
+}
+
+int main() {
+    struct label prog;
+    prog.index = 0;
+    prog.name = "Test Name";
+    for (int i = 0; i < 100; i++) {
+        void*[] A = alloc_array(void*, i);
+        for (int j = 0; j < i; j++) {
+            if (j > 2) {
+                A = alloc(void);
+            }
+            else {
+                int a = 2;
+                // break; this is an C1 extention
+            }
+        }
+    }
+    string fun = "I\t had some";
+    int w = 60;         // kilogram
+    while (!fat(w)) {
+        w = eat(w, 10);
+    }
+    return 0;
+}

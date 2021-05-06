@@ -1,5 +1,5 @@
 # file name definitions
-GRAMMER_FILE = C0Grammer
+GRAMMER_FILE = C0Grammar
 LEXICAL_FILE = C0Lex
 INTERMEDIATE = Common
 
@@ -12,15 +12,18 @@ CC = g++			# default compiler and linker
 OBJECT = HeliumC	# output parser
 TESTFILE = TestFile.c0
 
-$(OBJECT): $(LEXICAL_FILE).yy.o  $(GRAMMER_FILE).tab.o
-	$(CC) $(LEXICAL_FILE).yy.o $(GRAMMER_FILE).tab.o -o $(OBJECT)
+$(OBJECT): $(LEXICAL_FILE).yy.o $(GRAMMER_FILE).tab.o $(INTERMEDIATE).o
+	$(CC) $(LEXICAL_FILE).yy.o $(GRAMMER_FILE).tab.o $(INTERMEDIATE).o -o $(OBJECT)
 	@./$(OBJECT) $(TESTFILE)
 
 $(LEXICAL_FILE).yy.o: $(LEXICAL_FILE).yy.c $(GRAMMER_FILE).tab.h $(INTERMEDIATE).h
-	$(CC) -c $(LEXICAL_FILE).yy.c
+	$(CC) -c $(LEXICAL_FILE).yy.c $(INTERMEDIATE).h
 
 $(GRAMMER_FILE).tab.o: $(GRAMMER_FILE).tab.c $(INTERMEDIATE).h
-	$(CC) -c $(GRAMMER_FILE).tab.c
+	$(CC) -c $(GRAMMER_FILE).tab.c $(INTERMEDIATE).h
+
+$(INTERMEDIATE).o: $(INTERMEDIATE).c $(INTERMEDIATE).h
+	$(CC) -c $(INTERMEDIATE).c $(INTERMEDIATE).h
 
 $(GRAMMER_FILE).tab.c $(GRAMMER_FILE).tab.h: $(GRAMMER_FILE).y
 	$(YACC) -d $(GRAMMER_FILE).y
