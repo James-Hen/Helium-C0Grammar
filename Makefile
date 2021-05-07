@@ -32,4 +32,4 @@ $(LEXICAL_FILE).yy.c: $(LEXICAL_FILE).l
 	$(LEX) -o $(LEXICAL_FILE).yy.c $(LEXICAL_FILE).l
 
 clean:
-	@rm -f $(OBJECT) *.o *.tab.c *.tab.h *.yy.c
+	@rm -f $(OBJECT) *.o *.tab.c *.tab.h *.yy.c *.h.gch
