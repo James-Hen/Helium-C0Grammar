@@ -118,15 +118,15 @@ blank_chars	([ \f\r\t\v]+)
 "?"				{ lhint("op:\t%s", yytext); yylval.node = newnode("?"); return '?'; }
 
 
-{identifier}	{ lhint("id:\t%s", yytext); yylval.node = newnode("identifier"); return IDENTIFIER; }
+{identifier}	{ lhint("id:\t%s", yytext); yylval.node = newnode(yytext); return IDENTIFIER; }
 
-{integer}		{ lhint("i:\t%s", yytext); yylval.node = newnode("integer"); return INTEGER; }
+{integer}		{ lhint("i:\t%s", yytext); yylval.node = newnode(yytext); return INTEGER; }
 
-{float}			{ lhint("fl:\t%s", yytext); yylval.node = newnode("float"); return FLOAT; }
+{float}			{ lhint("fl:\t%s", yytext); yylval.node = newnode(yytext); return FLOAT; }
 
-{character}		{ lhint("ch:\t%s", yytext); yylval.node = newnode("character"); return CHAR_LITERAL; }
+{character}		{ lhint("ch:\t%s", yytext); yylval.node = newnode(yytext); return CHAR_LITERAL; }
 
-{string}		{ lhint("s:\t%s", yytext); yylval.node = newnode("string"); return STRING_LITERAL; }
+{string}		{ lhint("s:\t%s", yytext); yylval.node = newnode(yytext); return STRING_LITERAL; }
 
 {blank_chars}	{ }
 				

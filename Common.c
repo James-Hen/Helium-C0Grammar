@@ -40,9 +40,9 @@ void trav_delete(struct Node* rt) {
 }
 // trav_outputf: as name indicated
 void trav_outputf(FILE* f, struct Node* rt) {
-	fprintf(f, "%d %s %d", rt->id, rt->name, rt->chcnt);
+	fprintf(f, "%d\t%s\t%d", rt->id, rt->name, rt->chcnt);
 	for (int i = 0; i < rt->chcnt; ++i) {
-		fprintf(f, " %d", rt->ch[i]->id);
+		fprintf(f, "\t%d", rt->ch[i]->id);
 	}
 	fprintf(f, "\n");
 	for (int i = 0; i < rt->chcnt; ++i) {

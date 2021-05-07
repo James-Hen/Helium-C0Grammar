@@ -1,7 +1,7 @@
-# Helium-YaYacc
-Helium's "Yet Another 'Yet Another Compiler Compiler'"
+# Helium-C0Grammar
+Helium's C0Grammar Analyzer
 
- Personal parser generator by James Zhang, as an individual assignment of the course *COMP450305*: "形式语言与编译——赵银亮", XJTU.
+ Personal C0 parser by James Zhang, as an individual assignment of the course *COMP450305*: "形式语言与编译——赵银亮", XJTU.
 
 
 
@@ -13,4 +13,4 @@ Helium's "Yet Another 'Yet Another Compiler Compiler'"
 
 ## Project description
 
-This project aims to imitate the `Yacc` tool, simply using the LR(1) technique to analyze the given C0 grammar.
+This project aims to use `yacc` tool to develop a grammatic analyzer for C0 (CMU 15-122)
