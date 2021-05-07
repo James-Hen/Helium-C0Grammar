@@ -115,11 +115,13 @@ un_op		:	'!'
 			|	'-'
 			;
 
-bin_op		:	'<' | LE_OP | EQ_OP | GE_OP | '>'
+bin_op		:	OR_OP | AND_OP | '|' | '^' | '&'
+			|	'<' | LE_OP | EQ_OP | NE_OP | GE_OP | '>'
+			|	RIGHT_OP | LEFT_OP
 			|	'*' | '/' | '%'
 			|	'+' | '-'
 			;
-
+			
 asn_op		:	'='
 			|	MUL_ASSIGN
 			|	DIV_ASSIGN

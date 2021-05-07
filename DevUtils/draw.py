@@ -18,7 +18,7 @@ with open("TestFile.tree", "r") as f:
             G.add_edge(nid, int(prm[i]))
 
 pos = graphviz_layout(G, prog='dot')
-nx.draw_networkx_edges(G, pos, width=[0.2]*len(G.edges), arrows=True)
-nx.draw_networkx_nodes(G, pos, node_size=[50]*len(G.nodes), node_color=[(0.7,0.7,0.9)]*len(G.nodes))
-nx.draw_networkx_labels(G, pos, labels=names, font_size=5)
+nx.draw_networkx_edges(G, pos, width=[1]*len(G.edges), arrows=True)
+nx.draw_networkx_nodes(G, pos, node_size=[100]*len(G.nodes), node_color=[(0.7,0.7,0.9)]*len(G.nodes))
+nx.draw_networkx_labels(G, pos, labels=names, font_size=10)
 plt.show()

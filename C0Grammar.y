@@ -51,7 +51,6 @@ extern "C" {
 %token<node> FLOAT
 %token<node> CHAR_LITERAL
 %token<node> STRING_LITERAL
-%token<node> LIB_LITERAL
 
 // non-terminals
 %type<node> root prog
@@ -253,15 +252,31 @@ un_op		:	'!'
 			|	'-'
 				{ $$ = setputn("un_op", 1, $1); }
 			;
-bin_op		:	'<'
+bin_op		:	OR_OP
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	AND_OP
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	'|'
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	'^'
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	'&'
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	'<'
 				{ $$ = setputn("bin_op", 1, $1); }
 			|	LE_OP
 				{ $$ = setputn("bin_op", 1, $1); }
 			|	EQ_OP
 				{ $$ = setputn("bin_op", 1, $1); }
+			|	NE_OP
+				{ $$ = setputn("bin_op", 1, $1); }
 			|	GE_OP
 				{ $$ = setputn("bin_op", 1, $1); }
 			|	'>'
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	RIGHT_OP
+				{ $$ = setputn("bin_op", 1, $1); }
+			|	LEFT_OP
 				{ $$ = setputn("bin_op", 1, $1); }
 			|	'*'
 				{ $$ = setputn("bin_op", 1, $1); }
