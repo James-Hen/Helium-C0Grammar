@@ -8,14 +8,17 @@
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 #include <malloc.h>
 
 struct Node {
 	int id, chcnt;
-	const char* name;
+	char* name;			// string, shall use strdup()/free() to point to a heap space
 	struct Node** ch;
 };
-void setputn(struct Node* &n, const char* name, int chcnt, ...);
 struct Node* newnode(const char* name);
+struct Node* setputn(const char* name, int chcnt, ...);
+void trav_delete(struct Node* rt);
+void trav_outputf(FILE* f, struct Node* rt);
 
 #endif
